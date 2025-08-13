@@ -1,0 +1,10 @@
+fastapi
+uvicorn[standard]
+grpcio
+grpcio-tools
+sqlalchemy
+asyncpg
+alembic
+pydantic
+python-dotenv
+httpx

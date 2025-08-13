@@ -1,0 +1,27 @@
+version: "3.9"
+services:
+  users-db:
+    image: postgres:14
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: pass
+      POSTGRES_DB: usersdb
+    ports:
+      - "5433:5432"
+    volumes:
+      - users-db-data:/var/lib/postgresql/data
+
+  books-db:
+    image: postgres:14
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: pass
+      POSTGRES_DB: booksdb
+    ports:
+      - "5434:5432"
+    volumes:
+      - books-db-data:/var/lib/postgresql/data
+
+volumes:
+  users-db-data:
+  books-db-data:

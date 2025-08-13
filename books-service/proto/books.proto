@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package bookverse.books;
+
+import "google/protobuf/empty.proto";
+
+message Book {
+  int32 id = 1;
+  string title = 2;
+  string author = 3;
+  int32 published_year = 4;
+}
+
+message BookId {
+  int32 id = 1;
+}
+
+message CreateBookRequest {
+  Book book = 1;
+}
+
+message CreateBookResponse {
+  Book book = 1;
+}
+
+message GetBookResponse {
+  Book book = 1;
+}
+
+message ListBooksResponse {
+  repeated Book books = 1;
+}
+
+service Books {
+  rpc CreateBook (CreateBookRequest) returns (CreateBookResponse);
+  rpc GetBook (BookId) returns (GetBookResponse);
+  rpc ListBooks (google.protobuf.Empty) returns (ListBooksResponse);
+}
