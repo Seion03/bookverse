@@ -26,7 +26,7 @@ if _version_not_supported:
     )
 
 
-class BooksStub(object):
+class BooksServiceStub(object):
     """Missing associated documentation comment in .proto file."""
 
     def __init__(self, channel):
@@ -36,23 +36,38 @@ class BooksStub(object):
             channel: A grpc.Channel.
         """
         self.CreateBook = channel.unary_unary(
-                '/bookverse.books.Books/CreateBook',
+                '/bookverse.books.BooksService/CreateBook',
                 request_serializer=books__pb2.CreateBookRequest.SerializeToString,
                 response_deserializer=books__pb2.CreateBookResponse.FromString,
                 _registered_method=True)
         self.GetBook = channel.unary_unary(
-                '/bookverse.books.Books/GetBook',
+                '/bookverse.books.BooksService/GetBook',
                 request_serializer=books__pb2.BookId.SerializeToString,
                 response_deserializer=books__pb2.GetBookResponse.FromString,
                 _registered_method=True)
+        self.UpdateBook = channel.unary_unary(
+                '/bookverse.books.BooksService/UpdateBook',
+                request_serializer=books__pb2.UpdateBookRequest.SerializeToString,
+                response_deserializer=books__pb2.UpdateBookResponse.FromString,
+                _registered_method=True)
+        self.DeleteBook = channel.unary_unary(
+                '/bookverse.books.BooksService/DeleteBook',
+                request_serializer=books__pb2.BookId.SerializeToString,
+                response_deserializer=books__pb2.DeleteBookResponse.FromString,
+                _registered_method=True)
         self.ListBooks = channel.unary_unary(
-                '/bookverse.books.Books/ListBooks',
+                '/bookverse.books.BooksService/ListBooks',
+                request_serializer=books__pb2.ListBooksRequest.SerializeToString,
+                response_deserializer=books__pb2.ListBooksResponse.FromString,
+                _registered_method=True)
+        self.GetAllBooks = channel.unary_unary(
+                '/bookverse.books.BooksService/GetAllBooks',
                 request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
                 response_deserializer=books__pb2.ListBooksResponse.FromString,
                 _registered_method=True)
 
 
-class BooksServicer(object):
+class BooksServiceServicer(object):
     """Missing associated documentation comment in .proto file."""
 
     def CreateBook(self, request, context):
@@ -67,14 +82,32 @@ class BooksServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def UpdateBook(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def DeleteBook(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def ListBooks(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def GetAllBooks(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
 
-def add_BooksServicer_to_server(servicer, server):
+
+def add_BooksServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'CreateBook': grpc.unary_unary_rpc_method_handler(
                     servicer.CreateBook,
@@ -86,20 +119,35 @@ def add_BooksServicer_to_server(servicer, server):
                     request_deserializer=books__pb2.BookId.FromString,
                     response_serializer=books__pb2.GetBookResponse.SerializeToString,
             ),
+            'UpdateBook': grpc.unary_unary_rpc_method_handler(
+                    servicer.UpdateBook,
+                    request_deserializer=books__pb2.UpdateBookRequest.FromString,
+                    response_serializer=books__pb2.UpdateBookResponse.SerializeToString,
+            ),
+            'DeleteBook': grpc.unary_unary_rpc_method_handler(
+                    servicer.DeleteBook,
+                    request_deserializer=books__pb2.BookId.FromString,
+                    response_serializer=books__pb2.DeleteBookResponse.SerializeToString,
+            ),
             'ListBooks': grpc.unary_unary_rpc_method_handler(
                     servicer.ListBooks,
+                    request_deserializer=books__pb2.ListBooksRequest.FromString,
+                    response_serializer=books__pb2.ListBooksResponse.SerializeToString,
+            ),
+            'GetAllBooks': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetAllBooks,
                     request_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
                     response_serializer=books__pb2.ListBooksResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'bookverse.books.Books', rpc_method_handlers)
+            'bookverse.books.BooksService', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
-    server.add_registered_method_handlers('bookverse.books.Books', rpc_method_handlers)
+    server.add_registered_method_handlers('bookverse.books.BooksService', rpc_method_handlers)
 
 
  # This class is part of an EXPERIMENTAL API.
-class Books(object):
+class BooksService(object):
     """Missing associated documentation comment in .proto file."""
 
     @staticmethod
@@ -116,7 +164,7 @@ class Books(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/bookverse.books.Books/CreateBook',
+            '/bookverse.books.BooksService/CreateBook',
             books__pb2.CreateBookRequest.SerializeToString,
             books__pb2.CreateBookResponse.FromString,
             options,
@@ -143,9 +191,63 @@ class Books(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/bookverse.books.Books/GetBook',
+            '/bookverse.books.BooksService/GetBook',
             books__pb2.BookId.SerializeToString,
             books__pb2.GetBookResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def UpdateBook(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/bookverse.books.BooksService/UpdateBook',
+            books__pb2.UpdateBookRequest.SerializeToString,
+            books__pb2.UpdateBookResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def DeleteBook(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/bookverse.books.BooksService/DeleteBook',
+            books__pb2.BookId.SerializeToString,
+            books__pb2.DeleteBookResponse.FromString,
             options,
             channel_credentials,
             insecure,
@@ -170,7 +272,34 @@ class Books(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/bookverse.books.Books/ListBooks',
+            '/bookverse.books.BooksService/ListBooks',
+            books__pb2.ListBooksRequest.SerializeToString,
+            books__pb2.ListBooksResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def GetAllBooks(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/bookverse.books.BooksService/GetAllBooks',
             google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
             books__pb2.ListBooksResponse.FromString,
             options,

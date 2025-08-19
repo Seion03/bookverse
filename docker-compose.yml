@@ -20,8 +20,8 @@ services:
     ports:
       - "5434:5432"
     volumes:
-      - books-db-data:/var/lib/postgresql/data
-
+      - books-db-data:/var/lib/postgresql/data 
+      
 volumes:
   users-db-data:
   books-db-data:

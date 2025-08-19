@@ -23,27 +23,37 @@ _sym_db = _symbol_database.Default()
 
 
 from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
+from google.protobuf import timestamp_pb2 as google_dot_protobuf_dot_timestamp__pb2
+from google.protobuf import field_mask_pb2 as google_dot_protobuf_dot_field__mask__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0b\x62ooks.proto\x12\x0f\x62ookverse.books\x1a\x1bgoogle/protobuf/empty.proto\"I\n\x04\x42ook\x12\n\n\x02id\x18\x01 \x01(\x05\x12\r\n\x05title\x18\x02 \x01(\t\x12\x0e\n\x06\x61uthor\x18\x03 \x01(\t\x12\x16\n\x0epublished_year\x18\x04 \x01(\x05\"\x14\n\x06\x42ookId\x12\n\n\x02id\x18\x01 \x01(\x05\"8\n\x11\x43reateBookRequest\x12#\n\x04\x62ook\x18\x01 \x01(\x0b\x32\x15.bookverse.books.Book\"9\n\x12\x43reateBookResponse\x12#\n\x04\x62ook\x18\x01 \x01(\x0b\x32\x15.bookverse.books.Book\"6\n\x0fGetBookResponse\x12#\n\x04\x62ook\x18\x01 \x01(\x0b\x32\x15.bookverse.books.Book\"9\n\x11ListBooksResponse\x12$\n\x05\x62ooks\x18\x01 \x03(\x0b\x32\x15.bookverse.books.Book2\xed\x01\n\x05\x42ooks\x12U\n\nCreateBook\x12\".bookverse.books.CreateBookRequest\x1a#.bookverse.books.CreateBookResponse\x12\x44\n\x07GetBook\x12\x17.bookverse.books.BookId\x1a .bookverse.books.GetBookResponse\x12G\n\tListBooks\x12\x16.google.protobuf.Empty\x1a\".bookverse.books.ListBooksResponseb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0b\x62ooks.proto\x12\x0f\x62ookverse.books\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a google/protobuf/field_mask.proto\"\xdb\x01\n\x04\x42ook\x12\n\n\x02id\x18\x01 \x01(\x05\x12\r\n\x05title\x18\x02 \x01(\t\x12\x0e\n\x06\x61uthor\x18\x03 \x01(\t\x12\x0c\n\x04isbn\x18\x04 \x01(\t\x12\x16\n\x0epublished_year\x18\x05 \x01(\x05\x12\r\n\x05genre\x18\x06 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x07 \x01(\t\x12.\n\ncreated_at\x18\x08 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12.\n\nupdated_at\x18\t \x01(\x0b\x32\x1a.google.protobuf.Timestamp\"\x14\n\x06\x42ookId\x12\n\n\x02id\x18\x01 \x01(\x05\"|\n\x11\x43reateBookRequest\x12\r\n\x05title\x18\x01 \x01(\t\x12\x0e\n\x06\x61uthor\x18\x02 \x01(\t\x12\x0c\n\x04isbn\x18\x03 \x01(\t\x12\x16\n\x0epublished_year\x18\x04 \x01(\x05\x12\r\n\x05genre\x18\x05 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x06 \x01(\t\"[\n\x12\x43reateBookResponse\x12#\n\x04\x62ook\x18\x01 \x01(\x0b\x32\x15.bookverse.books.Book\x12\x0f\n\x07success\x18\x02 \x01(\x08\x12\x0f\n\x07message\x18\x03 \x01(\t\"E\n\x0fGetBookResponse\x12#\n\x04\x62ook\x18\x01 \x01(\x0b\x32\x15.bookverse.books.Book\x12\r\n\x05\x66ound\x18\x02 \x01(\x08\"u\n\x11UpdateBookRequest\x12\n\n\x02id\x18\x01 \x01(\x05\x12#\n\x04\x62ook\x18\x02 \x01(\x0b\x32\x15.bookverse.books.Book\x12/\n\x0bupdate_mask\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.FieldMask\"[\n\x12UpdateBookResponse\x12#\n\x04\x62ook\x18\x01 \x01(\x0b\x32\x15.bookverse.books.Book\x12\x0f\n\x07success\x18\x02 \x01(\x08\x12\x0f\n\x07message\x18\x03 \x01(\t\"6\n\x12\x44\x65leteBookResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12\x0f\n\x07message\x18\x02 \x01(\t\"^\n\x10ListBooksRequest\x12\r\n\x05limit\x18\x01 \x01(\x05\x12\x0e\n\x06offset\x18\x02 \x01(\x05\x12\x14\n\x0cgenre_filter\x18\x03 \x01(\t\x12\x15\n\rauthor_filter\x18\x04 \x01(\t\"N\n\x11ListBooksResponse\x12$\n\x05\x62ooks\x18\x01 \x03(\x0b\x32\x15.bookverse.books.Book\x12\x13\n\x0btotal_count\x18\x02 \x01(\x05\x32\xed\x03\n\x0c\x42ooksService\x12U\n\nCreateBook\x12\".bookverse.books.CreateBookRequest\x1a#.bookverse.books.CreateBookResponse\x12\x44\n\x07GetBook\x12\x17.bookverse.books.BookId\x1a .bookverse.books.GetBookResponse\x12U\n\nUpdateBook\x12\".bookverse.books.UpdateBookRequest\x1a#.bookverse.books.UpdateBookResponse\x12J\n\nDeleteBook\x12\x17.bookverse.books.BookId\x1a#.bookverse.books.DeleteBookResponse\x12R\n\tListBooks\x12!.bookverse.books.ListBooksRequest\x1a\".bookverse.books.ListBooksResponse\x12I\n\x0bGetAllBooks\x12\x16.google.protobuf.Empty\x1a\".bookverse.books.ListBooksResponseb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'books_pb2', _globals)
 if not _descriptor._USE_C_DESCRIPTORS:
   DESCRIPTOR._loaded_options = None
-  _globals['_BOOK']._serialized_start=61
-  _globals['_BOOK']._serialized_end=134
-  _globals['_BOOKID']._serialized_start=136
-  _globals['_BOOKID']._serialized_end=156
-  _globals['_CREATEBOOKREQUEST']._serialized_start=158
-  _globals['_CREATEBOOKREQUEST']._serialized_end=214
-  _globals['_CREATEBOOKRESPONSE']._serialized_start=216
-  _globals['_CREATEBOOKRESPONSE']._serialized_end=273
-  _globals['_GETBOOKRESPONSE']._serialized_start=275
-  _globals['_GETBOOKRESPONSE']._serialized_end=329
-  _globals['_LISTBOOKSRESPONSE']._serialized_start=331
-  _globals['_LISTBOOKSRESPONSE']._serialized_end=388
-  _globals['_BOOKS']._serialized_start=391
-  _globals['_BOOKS']._serialized_end=628
+  _globals['_BOOK']._serialized_start=129
+  _globals['_BOOK']._serialized_end=348
+  _globals['_BOOKID']._serialized_start=350
+  _globals['_BOOKID']._serialized_end=370
+  _globals['_CREATEBOOKREQUEST']._serialized_start=372
+  _globals['_CREATEBOOKREQUEST']._serialized_end=496
+  _globals['_CREATEBOOKRESPONSE']._serialized_start=498
+  _globals['_CREATEBOOKRESPONSE']._serialized_end=589
+  _globals['_GETBOOKRESPONSE']._serialized_start=591
+  _globals['_GETBOOKRESPONSE']._serialized_end=660
+  _globals['_UPDATEBOOKREQUEST']._serialized_start=662
+  _globals['_UPDATEBOOKREQUEST']._serialized_end=779
+  _globals['_UPDATEBOOKRESPONSE']._serialized_start=781
+  _globals['_UPDATEBOOKRESPONSE']._serialized_end=872
+  _globals['_DELETEBOOKRESPONSE']._serialized_start=874
+  _globals['_DELETEBOOKRESPONSE']._serialized_end=928
+  _globals['_LISTBOOKSREQUEST']._serialized_start=930
+  _globals['_LISTBOOKSREQUEST']._serialized_end=1024
+  _globals['_LISTBOOKSRESPONSE']._serialized_start=1026
+  _globals['_LISTBOOKSRESPONSE']._serialized_end=1104
+  _globals['_BOOKSSERVICE']._serialized_start=1107
+  _globals['_BOOKSSERVICE']._serialized_end=1600
 # @@protoc_insertion_point(module_scope)
