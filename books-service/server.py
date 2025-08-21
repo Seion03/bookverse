@@ -313,7 +313,7 @@ async def serve():
     books_pb2_grpc.add_BooksServiceServicer_to_server(BooksServicer(), server)
     
     # Configure server address
-    listen_addr = '[::]:50051'
+    listen_addr = '[::]:50052'
     server.add_insecure_port(listen_addr)
     
     # Start server
