@@ -1,7 +1,10 @@
 version: "3.9"
+
 services:
+  # Users database
   users-db:
     image: postgres:14
+    container_name: users_db
     environment:
       POSTGRES_USER: user
       POSTGRES_PASSWORD: pass
@@ -10,9 +13,16 @@ services:
       - "5433:5432"
     volumes:
       - users-db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U user -d usersdb"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
+  # Books database  
   books-db:
     image: postgres:14
+    container_name: books_db
     environment:
       POSTGRES_USER: user
       POSTGRES_PASSWORD: pass
@@ -20,8 +30,33 @@ services:
     ports:
       - "5434:5432"
     volumes:
-      - books-db-data:/var/lib/postgresql/data 
-      
+      - books-db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U user -d booksdb"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Books gRPC Service
+  books-service:
+    build:
+      context: ./books-service
+      dockerfile: Dockerfile
+    container_name: books_service
+    ports:
+      - "50051:50051"
+    depends_on:
+      books-db:
+        condition: service_healthy
+    environment:
+      - BOOKS_DB_URL=postgresql+asyncpg://user:pass@books-db:5432/booksdb
+      - GRPC_PORT=50052
+    volumes:
+      - ./books-service:/app
+    working_dir: /app
+    command: ["python", "server.py"]
+    restart: unless-stopped
+
 volumes:
   users-db-data:
   books-db-data:
